@@ -1,0 +1,17 @@
+% This program helps you calculate the analytical expressions for the
+% position, velocity and acceleration of the phone 
+syms q1 q2 q3 q9 q10 L1 L2 L8 L9 sb
+syms dq1 dq2 dq3 dq9 dq10 dx dy
+syms ddq1 ddq2 ddq3 ddq9 ddq10 ddx ddy
+
+q=[q1 q2 q3 q9 q10].';
+dq=[dq1 dq2 dq3 dq9 dq10].';
+ddq=[ddq1 ddq2 ddq3 ddq9 ddq10].';
+
+x = - L1*sin(q1) - L2*sin(q2) - sb*sin(q3) + L8*sin(q9) + L9*sin(q10);
+y = + L1*cos(q1) + L2*cos(q2) + sb*cos(q3) - L8*cos(q9) - L9*cos(q10);
+
+dx=jacobian(x,q)*dq
+dy=jacobian(y,q)*dq
+ddx=jacobian(dx,q)*dq+jacobian(x,q)*ddq
+ddy=jacobian(dy,q)*dq+jacobian(y,q)*ddq
